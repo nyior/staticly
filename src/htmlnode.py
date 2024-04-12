@@ -23,5 +23,7 @@ class HTMLNode:
     def props_to_html(self) -> str:
         attrs: str = ""
         if self.props is not None:
-            for attr, value in self.props.values():
-                attrs += f" {attr}=\"{value}\" "
+            for attr, value in self.props.items():
+                attrs += f' {attr}="{value}"'
+   
+        return attrs
