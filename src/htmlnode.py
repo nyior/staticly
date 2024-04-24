@@ -27,3 +27,26 @@ class HTMLNode:
                 attrs += f' {attr}="{value}"'
    
         return attrs
+
+
+class LeafNode(HTMLNode):
+
+    def __init__(
+        self, 
+        value: str,
+        tag: str = None, 
+        props: dict[str, str] = None,
+    ) -> None:
+        super().__init__(tag=tag, value=value, props=props)
+
+    def to_html(self) -> str:
+        if self.value is None:
+            raise ValueError
+
+        if self.tag is None:
+            return f"{self.value}"
+        
+        props: str = self.props_to_html()
+        
+        leaf_node: str = f"<{self.tag}{props}>{self.value}<{self.tag}>"
+        return leaf_node
