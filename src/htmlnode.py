@@ -41,7 +41,7 @@ class LeafNode(HTMLNode):
 
     def to_html(self) -> str:
         if self.value is None:
-            raise ValueError
+            raise ValueError("You must pass a value")
 
         if self.tag is None:
             return f"{self.value}"
