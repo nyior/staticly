@@ -33,11 +33,11 @@ class TestLeafNode(unittest.TestCase):
         
         self.assertEqual(
             leaf.to_html(), 
-            '<a href="https://www.google.com" target="_blank">link<a>'
+            '<a href="https://www.google.com" target="_blank">link</a>'
         )
         self.assertEqual(
             leaf2.to_html(), 
-            '<p>a paragraph<p>'
+            '<p>a paragraph</p>'
         )
     
     def test_raises_exception(self) -> None:
@@ -84,41 +84,32 @@ class TestParentNode(unittest.TestCase):
         node = ParentNode(
             "p",
             [
-                 ParentNode(
+                ParentNode(
                     "a",
                     [
                         LeafNode(tag="b", value="Bold text"),
-                        LeafNode(value="Normal text"),
-                        LeafNode(tag="i", value="italic text"),
-                        LeafNode(value="Normal text"),
+                        LeafNode(tag="i", value="italic text")
                     ],
                 ),
-                LeafNode(tag="b", value="Bold text"),
-                LeafNode(value="Normal text"),
-                LeafNode(tag="i", value="italic text"),
-                LeafNode(value="Normal text"),
+                ParentNode(
+                    "a",
+                    [
+                        LeafNode(tag="b", value="Bold text")
+                    ],
+                ),
             ],
         )
         
         self.assertEqual(
             node.to_html(), 
-            "<p><a><b>Bold text<b>Normal text<i>italic text<i>Normal text<a><b>Bold text<b>Normal text<i>italic text<i>Normal text<p>"
+            "<p><a><b>Bold text</b><i>italic text</i></a><a><b>Bold text</b></a></p>"
         )
        
     
     def test_raises_exception_for_none_tag(self) -> None:
-        leaf = LeafNode( 
-            value="link to an a tag"
-        )
-        with self.assertRaises(ValueError) as context:
-            print(context)
-            leaf.to_html()
-
-        self.assertTrue("A tag must be provided" in str(context.exception))
-    
-    def test_raises_exception_for_none_tag(self) -> None:
-        leaf = LeafNode( 
-            value="link to an a tag"
+        leaf = ParentNode( 
+            tag=None,
+            children=[]
         )
         with self.assertRaises(ValueError) as context:
             print(context)
@@ -127,8 +118,9 @@ class TestParentNode(unittest.TestCase):
         self.assertTrue("A tag must be provided" in str(context.exception))
     
     def test_raises_exception_for_none_children(self) -> None:
-        leaf = LeafNode( 
-            value="link to an a tag"
+        leaf = ParentNode( 
+            tag="p",
+            children=None
         )
         with self.assertRaises(ValueError) as context:
             print(context)

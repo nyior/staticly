@@ -48,7 +48,7 @@ class LeafNode(HTMLNode):
         
         props: str = self.props_to_html()
         
-        leaf_node: str = f"<{self.tag}{props}>{self.value}<{self.tag}>"
+        leaf_node: str = f"<{self.tag}{props}>{self.value}</{self.tag}>"
         return leaf_node
     
 
@@ -76,6 +76,6 @@ class ParentNode(HTMLNode):
             node = c.to_html()
             child_nodes += node
 
-        nodes = f"<{self.tag}>{child_nodes}<{self.tag}>"
+        nodes = f"<{self.tag}>{child_nodes}</{self.tag}>"
         return nodes
         
