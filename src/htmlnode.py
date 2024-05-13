@@ -50,7 +50,6 @@ class LeafNode(HTMLNode):
         
         leaf_node: str = f"<{self.tag}{props}>{self.value}</{self.tag}>"
         return leaf_node
-    
 
 
 class ParentNode(HTMLNode):
