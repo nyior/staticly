@@ -2,6 +2,14 @@
 from htmlnode import LeafNode
 
 
+text_type_text: str = "text"
+text_type_bold: str = "bold"
+text_type_italic: str = "italic"
+text_type_code: str = "code"
+text_type_link: str = "link"
+text_type_image: str = "image"
+
+
 class TextNode:
     
     def __init__(
@@ -21,13 +29,6 @@ class TextNode:
     
 
 def text_node_to_html_node(text_node: TextNode) -> LeafNode:
-    text_type_text: str = "text"
-    text_type_bold: str = "bold"
-    text_type_italic: str = "italic"
-    text_type_code: str = "code"
-    text_type_link: str = "link"
-    text_type_image: str = "image"
-    
     if text_node.text_type == text_type_text:
         return LeafNode(value=text_node.text)
     
