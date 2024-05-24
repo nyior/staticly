@@ -1,9 +1,11 @@
-from textnode import (
+from src.textnode import (
     TextNode,
     text_type_text,
 )
 
 
+# TODO: Extend function to support multiple levels of nesting
+# E.g: This is an *italic and **bold** word*.
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
     for old_node in old_nodes:
