@@ -3,6 +3,7 @@
 import unittest
 
 from  src.htmlnode import HTMLNode, LeafNode, ParentNode
+from src.textnode import TextNode, text_node_to_html_node
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -61,6 +62,12 @@ class TestLeafNode(unittest.TestCase):
             leaf.to_html(), 
             "this is a link"
         )
+    
+    def test_textnode_to_html_node(self) -> None:
+        textnode = TextNode("This is text node", "text")
+        leafnode = text_node_to_html_node(textnode)
+
+        self.assertTrue(isinstance(leafnode, LeafNode))
 
 
 class TestParentNode(unittest.TestCase):

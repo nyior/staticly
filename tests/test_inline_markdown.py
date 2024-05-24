@@ -7,24 +7,23 @@ from src.textnode import (
     TextNode,
     text_type_text,
     text_type_bold,
-    text_type_code,
 )
 
 
 class TestInlineMarkdown(unittest.TestCase):
 
-    def test_raises_exception(self):
-        old_nodes = [TextNode("This is text with a **bolded word", "text")]
+    def test_raises_exception(self) -> None:
+        old_nodes: list = [TextNode("This is text with a **bolded word", "text")]
         
         with self.assertRaises(ValueError) as context:
             split_nodes_delimiter(old_nodes, "**", text_type_bold)
 
         self.assertTrue("Invalid markdown, formatted section not closed" in str(context.exception))
 
-    def test_eq(self):
-        old_nodes = [TextNode("This is text with a **bolded** word", "text")]
-        new_nodes = split_nodes_delimiter(old_nodes, "**", text_type_bold)
-        expected_new_nodes = [
+    def test_eq(self) -> None:
+        old_nodes: list = [TextNode("This is text with a **bolded** word", "text")]
+        new_nodes: list = split_nodes_delimiter(old_nodes, "**", text_type_bold)
+        expected_new_nodes: list = [
             TextNode("This is text with a ", text_type_text),
             TextNode("bolded", text_type_bold),
             TextNode(" word", text_type_text),
