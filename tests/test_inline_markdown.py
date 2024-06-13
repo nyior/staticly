@@ -41,14 +41,6 @@ class TestSplitNodeDelimeter(unittest.TestCase):
 
 class TestSplitNodeImage(unittest.TestCase):
 
-    # def test_raises_exception(self) -> None:
-    #     old_nodes: list = [TextNode("This is text with an !(https://storage.googleapis.com/)", text_type_text)]
-        
-    #     with self.assertRaises(ValueError) as context:
-    #         split_nodes_image(old_nodes)
-
-    #     self.assertTrue("Invalid markdown, image section not closed" in str(context.exception))
-
     def test_eq(self) -> None:
         old_nodes: list = [
             TextNode(
