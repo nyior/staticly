@@ -5,14 +5,17 @@ import unittest
 from  src.inline_markdown import (
     split_nodes_delimiter,
     split_nodes_image,
-    split_nodes_link
+    split_nodes_link,
+    text_to_textnodes
 )
 from src.textnode import (
     TextNode,
     text_type_text,
     text_type_bold,
     text_type_image,
-    text_type_link
+    text_type_link,
+    text_type_code,
+    text_type_italic
 )
 
 
@@ -83,6 +86,28 @@ class TestSplitNodeLink(unittest.TestCase):
 
         self.assertEqual(len(new_nodes), 4)
         self.assertEqual(new_nodes, expected_new_nodes)
+
+
+class TextToTextnodes(unittest.TestCase):
+
+    def test_eq(self) -> None:
+        text: str = "This is **text** with an *italic* word and a `code block` and an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and a [link](https://boot.dev)"
+        nodes: list = text_to_textnodes(text)
+        expected_nodes: list = [
+            TextNode("This is ", text_type_text),
+            TextNode("text", text_type_bold),
+            TextNode(" with an ", text_type_text),
+            TextNode("italic", text_type_italic),
+            TextNode(" word and a ", text_type_text),
+            TextNode("code block", text_type_code),
+            TextNode(" and an ", text_type_text),
+            TextNode("image", text_type_image, "https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png"),
+            TextNode(" and a ", text_type_text),
+            TextNode("link", text_type_link, "https://boot.dev"),
+        ]
+
+        self.assertEqual(len(nodes), 10)
+        self.assertEqual(nodes, expected_nodes)
 
 
 if __name__ == "__main__":
