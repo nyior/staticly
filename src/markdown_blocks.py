@@ -1,8 +1,8 @@
 #markdown_blocks.py
 
-from htmlnode import ParentNode
-from inline_markdown import text_to_textnodes
-from textnode import text_node_to_html_node
+from src.htmlnode import ParentNode
+from src.inline_markdown import text_to_textnodes
+from src.textnode import text_node_to_html_node
 
 
 block_type_paragraph = "paragraph"
