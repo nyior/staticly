@@ -1,4 +1,5 @@
 import unittest
+from src.htmlnode import ParentNode
 from src.markdown_blocks import (
     markdown_to_html_node,
     markdown_to_blocks,
@@ -35,7 +36,7 @@ This is the same paragraph on a new line
             expected_blocks
         )
 
-    def test_markdown_to_blocks_newlines(self):
+    def test_markdown_to_blocks_newlines(self) -> None:
         md: str = """
 This is **bolded** paragraph
 
@@ -60,36 +61,36 @@ This is the same paragraph on a new line
             expected_blocks
         )
 
-    def test_block_to_block_types(self):
-        block = "# heading"
+    def test_block_to_block_types(self) -> None:
+        block: str = "# heading"
         self.assertEqual(block_to_block_type(block), block_type_heading)
-        block = "```\ncode\n```"
+        block: str = "```\ncode\n```"
         self.assertEqual(block_to_block_type(block), block_type_code)
-        block = "> quote\n> more quote"
+        block: str = "> quote\n> more quote"
         self.assertEqual(block_to_block_type(block), block_type_quote)
-        block = "* list\n* items"
+        block: str = "* list\n* items"
         self.assertEqual(block_to_block_type(block), block_type_ulist)
-        block = "1. list\n2. items"
+        block: str = "1. list\n2. items"
         self.assertEqual(block_to_block_type(block), block_type_olist)
-        block = "paragraph"
+        block: str = "paragraph"
         self.assertEqual(block_to_block_type(block), block_type_paragraph)
     
-    def test_paragraph(self):
-        md = """
+    def test_paragraph(self) -> None:
+        md: str = """
 This is **bolded** paragraph
 text in a p
 tag here
 
 """
-        node = markdown_to_html_node(md)
-        html = node.to_html()
+        node: ParentNode = markdown_to_html_node(md)
+        html: ParentNode = node.to_html()
         self.assertEqual(
             html,
             "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>",
         )
 
-    def test_paragraphs(self):
-        md = """
+    def test_paragraphs(self) -> None:
+        md: str = """
 This is **bolded** paragraph
 text in a p
 tag here
@@ -97,15 +98,15 @@ tag here
 This is another paragraph with *italic* text and `code` here
 
 """
-        node = markdown_to_html_node(md)
-        html = node.to_html()
+        node: ParentNode = markdown_to_html_node(md)
+        html: ParentNode = node.to_html()
         self.assertEqual(
             html,
             "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>",
         )
 
-    def test_lists(self):
-        md = """
+    def test_lists(self) -> None:
+        md: str = """
 - This is a list
 - with items
 - and *more* items
@@ -115,53 +116,53 @@ This is another paragraph with *italic* text and `code` here
 3. and more items
 
 """
-        node = markdown_to_html_node(md)
-        html = node.to_html()
+        node: ParentNode = markdown_to_html_node(md)
+        html: ParentNode = node.to_html()
         self.assertEqual(
             html,
             "<div><ul><li>This is a list</li><li>with items</li><li>and <i>more</i> items</li></ul><ol><li>This is an <code>ordered</code> list</li><li>with items</li><li>and more items</li></ol></div>",
         )
 
-    def test_headings(self):
-        md = """
+    def test_headings(self) -> None:
+        md: str = """
 # this is an h1
 
 this is paragraph text
 
 ## this is an h2
 """
-        node = markdown_to_html_node(md)
-        html = node.to_html()
+        node: ParentNode = markdown_to_html_node(md)
+        html: ParentNode = node.to_html()
         self.assertEqual(
             html,
             "<div><h1>this is an h1</h1><p>this is paragraph text</p><h2>this is an h2</h2></div>",
         )
 
-    def test_blockquote(self):
-        md = """
+    def test_blockquote(self) -> None:
+        md: str = """
 > This is a
 > blockquote block
 
 this is paragraph text
 
 """
-        node = markdown_to_html_node(md)
-        html = node.to_html()
+        node: ParentNode = markdown_to_html_node(md)
+        html: ParentNode = node.to_html()
         self.assertEqual(
             html,
             "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
         )
 
-    def test_blockquote(self):
-        md = """
+    def test_blockquote(self) -> None:
+        md: str = """
 > This is a
 > blockquote block
 
 this is paragraph text
 
 """
-        node = markdown_to_html_node(md)
-        html = node.to_html()
+        node: ParentNode = markdown_to_html_node(md)
+        html: ParentNode = node.to_html()
         self.assertEqual(
             html,
             "<div><blockquote>This is a blockquote block</blockquote><p>this is paragraph text</p></div>",
