@@ -1,5 +1,5 @@
 # textnode.py
-from src.htmlnode import LeafNode
+from htmlnode import LeafNode
 
 
 text_type_text: str = "text"

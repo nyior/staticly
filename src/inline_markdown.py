@@ -1,4 +1,4 @@
-from src.textnode import (
+from textnode import (
     TextNode,
     text_type_text,
     text_type_bold,
@@ -7,7 +7,7 @@ from src.textnode import (
     text_type_image,
     text_type_link
 )
-from src.utils import (
+from utils import (
     extract_markdown_images,
     extract_markdown_links
 )
